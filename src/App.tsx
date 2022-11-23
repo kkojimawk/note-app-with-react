@@ -1,34 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import React, { useState } from "react";
+import { Main } from "./components/Main";
+import { Sidebar } from "./components/Sidebar";
 
-function App() {
-  const [count, setCount] = useState(0)
+export type Note = {
+  id: number;
+  title: string;
+  content: string;
+  modDate: number;
+};
+
+const App: React.FC = () => {
+  const [notes, setNotes] = useState<Note[]>([]);
+
+  const onAddNote = (): void => {
+    console.log("onAddNote");
+    const newNote: Note = {
+      id: 1,
+      title: "新しいノート",
+      content: "新しいノートの内容",
+      modDate: Date.now(),
+    };
+    setNotes([...notes, newNote]);
+    console.log(notes);
+  };
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div className="grid h-screen grid-cols-12 bg-neutral-100">
+      <Sidebar onAddNote={onAddNote} notes={notes} />
+      <Main />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
