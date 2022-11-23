@@ -4,8 +4,11 @@ import { Note } from "../../App";
 type Props = {
   notes: Note[];
   onAddNote: () => void;
-  onDeleteNote: (id?: string) => void;
-  activeNote: Note | undefined;
+  onDeleteNote: (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id?: string
+  ) => void;
+  activeNote: Note | undefined | null;
   onActiveNote: (id?: string) => void;
 };
 
@@ -31,7 +34,9 @@ export const Sidebar: React.FC<Props> = ({
           <div
             key={note.id}
             className={`border-b border-black p-6 transition-colors hover:bg-red-50 ${
-              activeNote && activeNote.id === note.id ? "bg-red-100" : ""
+              activeNote && activeNote.id === note.id
+                ? "bg-red-100 hover:bg-red-100"
+                : ""
             }`}
             onClick={() => onActiveNote(note.id)}
           >
@@ -39,7 +44,7 @@ export const Sidebar: React.FC<Props> = ({
               <h2 className="text-ellipsis text-xl font-bold">{note.title}</h2>
               <button
                 className="text-lg text-blue-500"
-                onClick={() => onDeleteNote(note.id)}
+                onClick={(e) => onDeleteNote(e, note.id)}
               >
                 削除
               </button>

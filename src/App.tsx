@@ -27,6 +27,7 @@ const App: React.FC = () => {
       modDate: Date.now(),
     };
     setNotes([...notes, newNote]);
+    setActiveNote(newNote);
   };
 
   const onActiveNote = (id?: string): void => {
@@ -34,13 +35,20 @@ const App: React.FC = () => {
     setActiveNote(_activeNote);
   };
 
-  const onDeleteNote = (id?: string): void => {
-    const newNotes = notes.filter((note) => note.id !== id);
-    setNotes(newNotes);
+  const onDeleteNote = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id?: string
+  ): void => {
+    e.stopPropagation();
+    const _notes = notes.filter((note) => note.id !== id);
+    setNotes(_notes);
+
+    if (activeNote && activeNote.id === id) {
+      setActiveNote(undefined);
+    }
   };
 
   const onUpdateNote = (updatedNote: Note) => {
-    //修正された新しいノートの配列を返す。
     const updatedNotesArray = notes.map((note) => {
       if (note.id === updatedNote.id) {
         return updatedNote;
@@ -58,6 +66,10 @@ const App: React.FC = () => {
     }
     localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
+
+  useEffect(() => {
+    setActiveNote(notes[0]);
+  }, []);
 
   return (
     <div className="grid h-screen grid-cols-12 bg-neutral-100">

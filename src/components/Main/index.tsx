@@ -13,7 +13,6 @@ export const Main: React.FC<Props> = ({ activeNote, onUpdateNote }) => {
       [key]: value,
       modDate: Date.now(),
     });
-    console.log(activeNote?.modDate);
   };
 
   return (
