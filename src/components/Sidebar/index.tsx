@@ -5,15 +5,15 @@ type Props = {
   notes: Note[];
   onAddNote: () => void;
   onDeleteNote: (id: string) => void;
-  activeNote: Note["id"] | null;
-  setActiveNote: (id: string) => void;
+  activeNote: Note | undefined;
+  onActiveNote: (id: string) => void;
 };
 export const Sidebar: React.FC<Props> = ({
   notes,
   onAddNote,
   onDeleteNote,
   activeNote,
-  setActiveNote,
+  onActiveNote,
 }) => {
   return (
     <div className="col-span-3 border-r border-slate-700 bg-white">
@@ -27,9 +27,9 @@ export const Sidebar: React.FC<Props> = ({
         <div
           key={note.id}
           className={`overflow-scroll border-b border-black p-6 transition-colors hover:bg-red-50 ${
-            activeNote === note.id ? "bg-red-100" : ""
+            activeNote && activeNote.id === note.id ? "bg-red-100" : ""
           }`}
-          onClick={() => setActiveNote(note.id)}
+          onClick={() => onActiveNote(note.id)}
         >
           <div className="flex justify-between">
             <h2 className="text-xl font-bold">{note.title}</h2>

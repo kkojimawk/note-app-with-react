@@ -12,17 +12,22 @@ export type Note = {
 
 const App: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>([]);
-  const [activeNote, setActiveNote] = useState<string | null>(null);
+  const [activeNote, setActiveNote] = useState<Note | undefined>(undefined);
 
   const onAddNote = (): void => {
     const newNote: Note = {
       id: uuid(),
-      title: "新しいノート",
+      title: "新しいノート1",
       content: "新しいノートの内容",
       modDate: Date.now(),
     };
     setNotes([...notes, newNote]);
     console.log(notes);
+  };
+
+  const onActiveNote = (id: string): void => {
+    const _activeNote = notes.find((note) => note.id === id);
+    setActiveNote(_activeNote);
   };
 
   const onDeleteNote = (id: string): void => {
@@ -37,9 +42,9 @@ const App: React.FC = () => {
         onAddNote={onAddNote}
         onDeleteNote={onDeleteNote}
         activeNote={activeNote}
-        setActiveNote={setActiveNote}
+        onActiveNote={onActiveNote}
       />
-      <Main />
+      <Main activeNote={activeNote} />
     </div>
   );
 };
