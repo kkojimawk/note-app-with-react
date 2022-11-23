@@ -25,7 +25,11 @@ export const Sidebar: React.FC<Props> = ({ notes, onAddNote }) => {
           </div>
           <p className="py-2">{note.content}</p>
           <p className="text-md opacity-80">
-            最後の修正日:{new Date(note.modDate).toLocaleDateString("ja-JP")}
+            最後の修正日:
+            {new Date(note.modDate).toLocaleDateString("ja-JP", {
+              hour: "numeric",
+              minute: "numeric",
+            })}
           </p>
         </div>
       ))}
