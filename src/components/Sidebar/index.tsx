@@ -4,8 +4,17 @@ import { Note } from "../../App";
 type Props = {
   notes: Note[];
   onAddNote: () => void;
+  onDeleteNote: (id: string) => void;
+  activeNote: Note["id"];
+  setActiveNote: (id: string) => void;
 };
-export const Sidebar: React.FC<Props> = ({ notes, onAddNote }) => {
+export const Sidebar: React.FC<Props> = ({
+  notes,
+  onAddNote,
+  onDeleteNote,
+  activeNote,
+  setActiveNote,
+}) => {
   return (
     <div className="col-span-3 border-r border-slate-700 bg-white">
       <div className="flex justify-between border-b border-black p-6">
@@ -14,14 +23,22 @@ export const Sidebar: React.FC<Props> = ({ notes, onAddNote }) => {
           追加
         </button>
       </div>
-      {notes.map((note, i) => (
+      {notes.map((note) => (
         <div
-          key={i}
-          className="overflow-scroll border-b border-black p-6 transition-colors hover:bg-red-50"
+          key={note.id}
+          className={`overflow-scroll border-b border-black p-6 transition-colors hover:bg-red-50 ${
+            activeNote === note.id ? "bg-red-100" : ""
+          }`}
+          onClick={() => setActiveNote(note.id)}
         >
           <div className="flex justify-between">
             <h2 className="text-xl font-bold">{note.title}</h2>
-            <button className="text-lg text-blue-500">削除</button>
+            <button
+              className="text-lg text-blue-500"
+              onClick={() => onDeleteNote(note.id)}
+            >
+              削除
+            </button>
           </div>
           <p className="py-2">{note.content}</p>
           <p className="text-md opacity-80">

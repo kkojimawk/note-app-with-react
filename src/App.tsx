@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Main } from "./components/Main";
 import { Sidebar } from "./components/Sidebar";
+import uuid from "react-uuid";
 
 export type Note = {
-  id: number;
+  id: string;
   title: string;
   content: string;
   modDate: number;
@@ -11,11 +12,11 @@ export type Note = {
 
 const App: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>([]);
+  const [activeNote, setActiveNote] = useState(null);
 
   const onAddNote = (): void => {
-    console.log("onAddNote");
     const newNote: Note = {
-      id: 1,
+      id: uuid(),
       title: "新しいノート",
       content: "新しいノートの内容",
       modDate: Date.now(),
@@ -24,9 +25,20 @@ const App: React.FC = () => {
     console.log(notes);
   };
 
+  const onDeleteNote = (id: string): void => {
+    const newNotes = notes.filter((note) => note.id !== id);
+    setNotes(newNotes);
+  };
+
   return (
     <div className="grid h-screen grid-cols-12 bg-neutral-100">
-      <Sidebar onAddNote={onAddNote} notes={notes} />
+      <Sidebar
+        notes={notes}
+        onAddNote={onAddNote}
+        onDeleteNote={onDeleteNote}
+        activeNote={activeNote}
+        setActiveNote={setActiveNote}
+      />
       <Main />
     </div>
   );
