@@ -20,7 +20,7 @@ export const Main: React.FC<Props> = ({ activeNote, onUpdateNote }) => {
     <div className="col-span-9 grid grid-flow-row grid-rows-2">
       {activeNote ? (
         <>
-          <div className="grid grid-flow-row grid-rows-6 gap-3 p-4">
+          <div className="row-span-1 grid grid-flow-row grid-rows-6 gap-3 p-4">
             <input
               className="row-span-1 w-full border p-3 text-2xl"
               type="text"
@@ -28,6 +28,7 @@ export const Main: React.FC<Props> = ({ activeNote, onUpdateNote }) => {
               onChange={(e) => {
                 onEditNote("title", e.target.value);
               }}
+              placeholder="タイトル"
             />
             <textarea
               className="row-span-5 w-full resize-none border p-3 text-xl"
@@ -38,7 +39,7 @@ export const Main: React.FC<Props> = ({ activeNote, onUpdateNote }) => {
               value={activeNote.content}
             ></textarea>
           </div>
-          <div className="grid-rows-1 bg-neutral-300 p-4">
+          <div className="row-span-1 bg-neutral-300 p-4">
             <div className="py-2 text-3xl font-bold">{activeNote.title}</div>
             <ReactMarkdown className="py-2 text-xl">
               {activeNote.content!}
