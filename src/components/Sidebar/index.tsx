@@ -24,8 +24,11 @@ export const Sidebar: React.FC<Props> = ({
   return (
     <div className="col-span-3 flex h-screen flex-col border-r border-slate-700 bg-white">
       <div className="flex justify-between border-b border-black p-6">
-        <h1 className="text-4xl">ノート</h1>
-        <button className="text-xl text-blue-500" onClick={onAddNote}>
+        <h1 className="text-4xl italic">ノート</h1>
+        <button
+          className="text-md rounded-lg border bg-blue-500 px-3 text-white"
+          onClick={onAddNote}
+        >
           追加
         </button>
       </div>
@@ -33,9 +36,9 @@ export const Sidebar: React.FC<Props> = ({
         {sortedNotes.map((note) => (
           <div
             key={note.id}
-            className={`border-b border-black p-6 transition-colors hover:bg-red-50 ${
+            className={`border-b border-black p-6 transition-colors hover:bg-blue-50 ${
               activeNote && activeNote.id === note.id
-                ? "bg-red-100 hover:bg-red-100"
+                ? "bg-blue-100 hover:bg-blue-100"
                 : ""
             }`}
             onClick={() => onActiveNote(note.id)}
@@ -43,7 +46,7 @@ export const Sidebar: React.FC<Props> = ({
             <div className="flex justify-between">
               <h2 className="text-ellipsis text-xl font-bold">{note.title}</h2>
               <button
-                className="text-lg text-blue-500"
+                className="text-lg text-red-500"
                 onClick={(e) => onDeleteNote(e, note.id)}
               >
                 削除

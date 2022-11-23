@@ -21,7 +21,7 @@ export const Main: React.FC<Props> = ({ activeNote, onUpdateNote }) => {
         <>
           <div className="row-span-1 grid grid-flow-row grid-rows-6 gap-3 p-4">
             <input
-              className="row-span-1 w-full border p-3 text-2xl"
+              className="row-span-1 w-full rounded-sm border border-black p-3 text-2xl"
               type="text"
               value={activeNote.title}
               onChange={(e) => {
@@ -30,7 +30,7 @@ export const Main: React.FC<Props> = ({ activeNote, onUpdateNote }) => {
               placeholder="タイトル"
             />
             <textarea
-              className="row-span-5 w-full resize-none border p-3 text-xl"
+              className="row-span-5 w-full resize-none rounded-sm border border-black p-3 text-xl"
               placeholder="ノート内容を記入"
               onChange={(e) => {
                 onEditNote("content", e.target.value);
