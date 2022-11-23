@@ -12,7 +12,7 @@ export type Note = {
 
 const App: React.FC = () => {
   const [notes, setNotes] = useState<Note[]>([]);
-  const [activeNote, setActiveNote] = useState(null);
+  const [activeNote, setActiveNote] = useState<string | null>(null);
 
   const onAddNote = (): void => {
     const newNote: Note = {

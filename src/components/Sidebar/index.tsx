@@ -5,7 +5,7 @@ type Props = {
   notes: Note[];
   onAddNote: () => void;
   onDeleteNote: (id: string) => void;
-  activeNote: Note["id"];
+  activeNote: Note["id"] | null;
   setActiveNote: (id: string) => void;
 };
 export const Sidebar: React.FC<Props> = ({
