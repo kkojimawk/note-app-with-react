@@ -4,9 +4,9 @@ import { Note } from "../../App";
 type Props = {
   notes: Note[];
   onAddNote: () => void;
-  onDeleteNote: (id: string) => void;
+  onDeleteNote: (id?: string) => void;
   activeNote: Note | undefined;
-  onActiveNote: (id: string) => void;
+  onActiveNote: (id?: string) => void;
 };
 export const Sidebar: React.FC<Props> = ({
   notes,
