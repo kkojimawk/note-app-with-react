@@ -47,7 +47,6 @@ const App: React.FC = () => {
     setActiveNote(updatedNote);
     setNotes(updatedNotesArray);
   };
-  console.log(activeNote?.modDate);
 
   useEffect(() => {
     if (!notes.length) {
