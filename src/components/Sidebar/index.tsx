@@ -8,6 +8,7 @@ type Props = {
   activeNote: Note | undefined;
   onActiveNote: (id?: string) => void;
 };
+
 export const Sidebar: React.FC<Props> = ({
   notes,
   onAddNote,
@@ -15,6 +16,8 @@ export const Sidebar: React.FC<Props> = ({
   activeNote,
   onActiveNote,
 }) => {
+  const sortedNotes = notes.sort((a, b) => b.modDate - a.modDate);
+
   return (
     <div className="col-span-3 flex h-screen flex-col border-r border-slate-700 bg-white">
       <div className="flex justify-between border-b border-black p-6">
@@ -24,7 +27,7 @@ export const Sidebar: React.FC<Props> = ({
         </button>
       </div>
       <div className="overflow-auto">
-        {notes.map((note) => (
+        {sortedNotes.map((note) => (
           <div
             key={note.id}
             className={`border-b border-black p-6 transition-colors hover:bg-red-50 ${
