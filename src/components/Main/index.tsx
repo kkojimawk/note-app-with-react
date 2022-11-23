@@ -1,5 +1,6 @@
 import React from "react";
 import { Note } from "../../App";
+import ReactMarkdown from "react-markdown";
 
 type Props = {
   activeNote: Note | undefined;
@@ -39,7 +40,9 @@ export const Main: React.FC<Props> = ({ activeNote, onUpdateNote }) => {
           </div>
           <div className="grid-rows-1 bg-neutral-300 p-4">
             <div className="py-2 text-3xl font-bold">{activeNote.title}</div>
-            <div className="py-2 text-xl">{activeNote.content}</div>
+            <ReactMarkdown className="py-2 text-xl">
+              {activeNote.content!}
+            </ReactMarkdown>
           </div>
         </>
       ) : (
