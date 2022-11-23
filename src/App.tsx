@@ -12,7 +12,11 @@ export type Note = {
 };
 
 const App: React.FC = () => {
-  const [notes, setNotes] = useState<Note[]>([]);
+  const [notes, setNotes] = useState<Note[]>(
+    localStorage.getItem("notes")
+      ? JSON.parse(localStorage.getItem("notes")!)
+      : []
+  );
   const [activeNote, setActiveNote] = useState<Note | undefined>(undefined);
 
   const onAddNote = (): void => {
@@ -52,6 +56,7 @@ const App: React.FC = () => {
     if (!notes.length) {
       setActiveNote(undefined);
     }
+    localStorage.setItem("notes", JSON.stringify(notes));
   }, [notes]);
 
   return (
